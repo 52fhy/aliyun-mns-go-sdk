@@ -218,6 +218,7 @@ func (p *aliMNSClient) Send(method Method, headers map[string]string, message in
 	url := buffer.String()
 
 	req := fasthttp.AcquireRequest()
+	defer fasthttp.ReleaseRequest(req) // 用完需要释放资源
 
 	req.SetRequestURI(url)
 	req.Header.SetMethod(string(method))
